@@ -1,0 +1,29 @@
+{
+  "name": "seattle-301d39-week2-lab",
+  "version": "1.0.0",
+  "description": "Seattle-301d39 coursework dealing with node, npm, server backends, and APIs",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Dervival/seattle-301d39-week2-lab.git"
+  },
+  "keywords": [
+    "CodeFellows",
+    "301"
+  ],
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Dervival/seattle-301d39-week2-lab/issues"
+  },
+  "homepage": "https://github.com/Dervival/seattle-301d39-week2-lab#readme",
+  "dependencies": {
+    "cors": "^2.8.4",
+    "dotenv": "^6.1.0",
+    "express": "^4.16.4"
+  }
+}
