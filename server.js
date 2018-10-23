@@ -12,7 +12,6 @@ const app = express();
 app.use(cors());
 
 app.get('/location', (request,response) => {
-  console.log('in get');
   const locationData = searchLatLong(request.query.data);
   loadData();
   response.send(locationData);
@@ -20,11 +19,9 @@ app.get('/location', (request,response) => {
 // .then(console.log('before loadData'),console.log('failed at')).then(loadData());
 
 function loadData(){
-    console.log('in loadData');
   app.get('/weather', (request,response)=>{
     // darksky.json only has one entry - no need for latitude or longitude at the moment
     // const weatherData = searchWeather(object.latitude, object.longitude);
-    console.log('made it app.get for weather');
     const weatherData = searchWeather();
     response.send(weatherData);
   })
@@ -44,7 +41,6 @@ function searchWeather(){
   let allDays = [];
   for(let i = 0; i < weatherData.daily.data.length; i++){
     allDays.push(new DayWeather(weatherData.daily.data[i]));
-    console.log(allDays);
   }
   return allDays;
 }
@@ -67,7 +63,7 @@ function DayWeather(data){
 function dateFormatter(epochTime){
   let translateTime = new Date(0);
   translateTime.setUTCSeconds(epochTime);
-  return translateTime;
+  return translateTime.toDateString();
 }
 
 app.listen(PORT, () => console.log(`Application is up and listening on ${PORT}`));
