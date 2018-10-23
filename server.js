@@ -13,8 +13,13 @@ app.use(cors());
 
 app.get('/location', (request,response) => {
   const locationData = searchLatLong(request.query.data);
-  loadData();
-  response.send(locationData);
+  if(request.query.data === 'seattle'){
+    loadData();
+    response.send(locationData);
+  }
+  else{
+    response.send(new APIError(500, 'Something went wrong'));
+  }
 });
 // .then(console.log('before loadData'),console.log('failed at')).then(loadData());
 
@@ -23,7 +28,12 @@ function loadData(){
     // darksky.json only has one entry - no need for latitude or longitude at the moment
     // const weatherData = searchWeather(object.latitude, object.longitude);
     const weatherData = searchWeather();
-    response.send(weatherData);
+    if(weatherData){
+      response.send(weatherData);
+    }
+    else{
+      response.send(new APIError(500, 'Sorry, something went wrong'));
+    }
   })
 }
 
@@ -57,6 +67,12 @@ function DayWeather(data){
   this.forecast = data.summary;
   this.time = dateFormatter(data.time);
   //allDays.push(this);
+}
+
+//Constructor function for APIError objects - returns a status and response
+function APIError(status, response){
+  this.status = status;
+  this.responseText = response;
 }
 
 //Assistant function to the DayWeather constructor
